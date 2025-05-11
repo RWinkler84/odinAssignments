@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+
+<script>
+
+    let playerScore = 0;
+    let computerScore = 0;
+    let round = 0;
+
+    function getUserChoice() {
+        let userInput = window.prompt(`Choose
+            (1) Rock
+            (2) Paper
+            (3) Scissors
+        `);
+
+        console.clear();
+
+        switch (userInput) {
+            case '1':
+                return 'Rock';
+                break;
+
+            case '2':
+                return 'Paper';
+                break;
+
+            case '3':
+                return 'Scissors';
+                break;
+
+            default:
+                alert('Invalid Choice! Try again!');
+                return getUserChoice();
+        }
+    }
+
+    function getComputerChoice() {
+        let rndNmb = Math.ceil(Math.random() * 3);
+
+        switch (rndNmb) {
+            case 1:
+                return 'Rock';
+                break;
+
+            case 2:
+                return 'Paper';
+                break;
+
+            case 3:
+                return 'Scissors';
+                break;
+        }
+    }
+
+    function getWinner(computerChoice, userChoice) {
+
+        let winner;
+
+        if (computerChoice == userChoice) return 'Tie! Nobody won!';
+
+        switch (userChoice) {
+            case 'Rock':
+                computerChoice == 'Paper' ? winner = 'Computer' : winner = 'Player';
+                break;
+
+            case 'Paper':
+                computerChoice == 'Scissors' ? winner = 'Computer' : winner = 'Player';
+                break;
+
+            case 'Scissors':
+                computerChoice == 'Rock' ? winner = 'Computer' : winner = 'Player';
+                break;
+        }
+
+        return winner + ' has won!';
+    }
+
+    function getResults() {
+
+        let computerChoice = getComputerChoice();
+        let userChoice = getUserChoice();
+        let whoWon = getWinner(computerChoice, userChoice);
+
+        console.log('Round: ' + round);
+        console.log('You chose: ' + userChoice);
+        console.log('The computer chose: ' + computerChoice);
+        console.log(whoWon);
+
+        return whoWon;
+    }
+
+
+    function runRound() {
+        round++
+
+        let winnerPhrase = getResults();
+
+        if (winnerPhrase == 'Computer has won!') computerScore++;
+        if (winnerPhrase == 'Player has won!') playerScore++;
+
+        console.table({
+            'Scores': {
+                'Computer': computerScore,
+                'Player': playerScore
+            }
+        });
+    }
+
+    console.log('Welcome to the Rock Paper Scissors game');
+
+    while (round < 5) {
+        runRound();
+    }
+
+    alert('Done! Wanne see the final score?');
+
+    console.clear();
+    console.log('Alright! I hope you enjoyed the game!');
+    console.log('Here is your final score:');
+    console.table({
+        'Scores': {
+            'Computer': computerScore,
+            'Player': playerScore
+        }
+    });
+
+
+</script>
+
+</html>
