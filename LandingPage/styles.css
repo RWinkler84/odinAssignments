@@ -1,0 +1,252 @@
+:root {
+  --darkBlueBackground: #1F2937;
+  --lightGreyBackground: #E5E7EB;
+  --whiteBackground: white;
+  --blueText: #3882F6;
+  --lightText: #F9FAF8;
+}
+
+* {
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  ;
+}
+
+.contentWrapper {
+  width: 100%;
+}
+
+img {
+  border-radius: 10px;
+}
+
+button {
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: var(--blueText);
+  color: var(--lightText);
+  font-weight: bold;
+}
+
+.divider {
+  min-height: 50px;
+}
+
+header,
+footer,
+.heroSection {
+  background-color: var(--darkBlueBackground);
+}
+
+.mainImageSection,
+.callToActionSection {
+  background-color: var(--whiteBackground);
+}
+
+.quoteSection {
+  background-color: var(--lightGreyBackground);
+}
+
+.menuContainer,
+.mainImageContainer {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+}
+
+@media screen and (max-width: 850px) {
+
+  .menuContainer,
+  .heroContainer,
+  .mainImageContainer,
+  .quoteContainer {
+    width: 90% !important;
+  }
+
+  .menuContainer {
+    flex-wrap: wrap;
+  }
+
+  .heroContainer img {
+    display: block;
+    float: none !important;
+    margin: 0 auto 20px !important;
+    max-width: unset !important;
+    width: 100% !important;
+  }
+}
+
+/* Menu Styles */
+
+.menuContainer {
+  justify-content: end;
+  color: var(--lightGreyBackground);
+  gap: 30px;
+  align-items: end;
+  padding-top: 20px;
+}
+
+.logo {
+  margin-right: auto;
+  color: var(--lightText);
+}
+
+.menuContainer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menuContainer a:visited {
+  color: var(--lightGreyBackground);
+}
+
+/* Hero Section Styles */
+
+.heroContainer {
+  width: 60%;
+  min-height: 400px;
+  margin: 0 auto;
+  color: var(--lightText);
+  gap: 10%;
+}
+
+.heroContainer img {
+  width: 40%;
+  min-width: 250px;
+  max-width: 360px;
+  float: right;
+  margin: 0 0 30px 50px;
+}
+
+.heroContainer h1 {
+  font-size: 48px;
+  font-weight: 900;
+  margin-top: 0;
+}
+
+/* Main Image Section Styles*/
+
+.mainImageSection h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 900;
+  margin-top: 0;
+  padding-top: 50px;
+}
+
+.mainImageContainer {
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+
+}
+
+.mainImageContainer img {
+  width: 100%;
+  border: solid 2px var(--blueText);
+}
+
+.mainImageContainer p {
+  text-align: center;
+}
+
+.mainImage {
+  width: 20%;
+  min-width: 200px;
+}
+
+/* Quote Section */
+
+.quoteContainer {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.quote {
+  font-size: 30px;
+  font-style: italic;
+  font-weight: light;
+  color: var(--darkBlueBackground);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0px 15% 10px;
+}
+
+.quoteOrigin {
+  text-align: right;
+  padding-right: 15%;
+  margin: 0px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+/* Call to Action Section */
+
+.callToActionContainer {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  background-color: var(--blueText);
+  border-radius: 10px;
+  padding: 40px 5%;
+  gap: 10%;
+  justify-content: space-between;
+}
+
+.callToActionContainer h3 {
+  margin: 0;
+  color: var(--lightText);
+}
+
+.callToActionContainer p {
+  margin: 0;
+  color: var(--lightText);
+}
+
+#buttonBox {
+  align-self: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .callToActionContainer {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 70%;
+  }
+
+  .callToActionContainer button {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .callToActionContainer {
+    width: 70%;
+  }
+  
+  #buttonBox {
+    display: flex;
+    width: 100%
+  }
+
+  #buttonBox button {
+    width: 100%;
+  }
+}
+
+/* footer */
+
+footer {
+  padding: 20px 0px;
+}
+
+footer p {
+  text-align: center;
+  margin: 0;
+  color: var(--lightText);
+}
