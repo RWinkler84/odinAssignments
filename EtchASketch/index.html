@@ -34,8 +34,13 @@
         }
 
         function createNewCanvas(){
-            let gridSize = window.prompt('How many tiles per side would you like to have for your next picture? (100 is max)');
+            let gridSize = Number(window.prompt('How many tiles per side would you like to have for your next picture? (100 is max)'));
 
+            if (gridSize > 100 || isNaN(gridSize)) createNewCanvas();
+
+            canvas.innerHTML = '';
+
+            prepareCanvas(gridSize);
         }
 
         document.addEventListener('DOMContentLoaded', prepareCanvas(16));
