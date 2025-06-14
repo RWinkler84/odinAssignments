@@ -8,41 +8,25 @@
 </head>
 
 <body>
+    <div>
+        <div id="results">
+            <p>Welcome to the Rock Paper Scissors game. Pick Rock, Paper or Scissors to start a game against the
+                computer.</p>
+        </div>
+        <button id="Rock" class="playerChoice">Rock</button>
+        <button id="Paper" class="playerChoice">Paper</button>
+        <button id="Scissors" class="playerChoice">Scissors</button>
+    </div>
 </body>
 
 <script>
+    document.querySelectorAll('.playerChoice').forEach(button => button.addEventListener('click', runRound));
+    const resultsDisplay = document.querySelector('#results');
 
     let playerScore = 0;
     let computerScore = 0;
     let round = 0;
 
-    function getUserChoice() {
-        let userInput = window.prompt(`Choose
-            (1) Rock
-            (2) Paper
-            (3) Scissors
-        `);
-
-        console.clear();
-
-        switch (userInput) {
-            case '1':
-                return 'Rock';
-                break;
-
-            case '2':
-                return 'Paper';
-                break;
-
-            case '3':
-                return 'Scissors';
-                break;
-
-            default:
-                alert('Invalid Choice! Try again!');
-                return getUserChoice();
-        }
-    }
 
     function getComputerChoice() {
         let rndNmb = Math.ceil(Math.random() * 3);
@@ -85,44 +69,71 @@
         return winner + ' has won!';
     }
 
-    function getResults() {
+    function displayResults(userChoice) {
 
         let computerChoice = getComputerChoice();
-        let userChoice = getUserChoice();
         let whoWon = getWinner(computerChoice, userChoice);
 
-        console.log('Round: ' + round);
-        console.log('You chose: ' + userChoice);
-        console.log('The computer chose: ' + computerChoice);
-        console.log(whoWon);
+        let resultsHTML = `
+            <p>Round: ${round}</p>
+            <p>You chose: ${userChoice}</p>
+            <p>The computer chose: ${computerChoice}</p>
+            <p>${whoWon}</p>
+        `;
+
+        resultsDisplay.innerHTML = resultsHTML;
 
         return whoWon;
     }
 
+    function displayFinalResult() {
+        let winnerPhrase;
 
-    function runRound() {
+        if (playerScore < computerScore) winnerPhrase = 'Though luck! The computer has won...';
+        if (playerScore > computerScore) winnerPhrase = 'Congratulations! You have won!';
+        if (playerScore == computerScore) winnerPhrase = 'Well...that is a tie! Better luck next time...';
+
+        let finalResultsHTML = `
+            <table>
+                <thead>
+                    <th>Your score</th>
+                    <th>Computer score</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${playerScore}</td>
+                        <td>${computerScore}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>${winnerPhrase}</p>
+        `;
+
+        resultsDisplay.innerHTML = finalResultsHTML;
+    }
+
+    function resetGame() {
+        playerScore = 0;
+        computerScore = 0;
+        round = 0;
+    }
+
+
+    function runRound(event) {
         round++
 
-        let winnerPhrase = getResults();
+        let winnerPhrase = displayResults(event.target.id);
 
         if (winnerPhrase == 'Computer has won!') computerScore++;
         if (winnerPhrase == 'Player has won!') playerScore++;
 
-        console.table({
-            'Scores': {
-                'Computer': computerScore,
-                'Player': playerScore
-            }
-        });
+        if (round == 5) {
+            displayFinalResult();
+            resetGame();
+        }
     }
 
     console.log('Welcome to the Rock Paper Scissors game');
-
-    while (round < 5) {
-        runRound();
-    }
-
-    alert('Done! Wanne see the final score?');
 
     console.clear();
     console.log('Alright! I hope you enjoyed the game!');
