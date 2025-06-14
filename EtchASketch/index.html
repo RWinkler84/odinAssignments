@@ -15,11 +15,12 @@
     <script>
         const canvas = document.querySelector('#canvas');
 
-        function prepareCanvas() {
+        function prepareCanvas(gridSize) {
             let html = '';
+            let tileWidth = 600 / gridSize;
 
-            for (let i = 0; i < 16 * 16; i++) {
-                html += '<div class="tile"></div>'
+            for (let i = 0; i < gridSize * gridSize; i++) {
+                html += `<div class="tile" style="width: ${tileWidth}px"></div>`;
             }
 
             canvas.innerHTML = html;
@@ -35,10 +36,9 @@
         function createNewCanvas(){
             let gridSize = window.prompt('How many tiles per side would you like to have for your next picture? (100 is max)');
 
-            console.log(gridSize);
         }
 
-        document.addEventListener('DOMContentLoaded', prepareCanvas);
+        document.addEventListener('DOMContentLoaded', prepareCanvas(16));
         document.querySelector('#newGridButton').addEventListener('click', createNewCanvas)
     </script>
 </body>

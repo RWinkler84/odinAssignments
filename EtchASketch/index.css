@@ -13,7 +13,7 @@ body {
 }
 
 #canvas {
-    max-width: 75%;
+    width: 600px;
     aspect-ratio: 1 / 1;
     background-color: white;
     display: flex;
@@ -22,7 +22,6 @@ body {
 
 .tile {
     box-sizing: border-box;
-    flex: 1 1 6.25%;
     aspect-ratio: 1 / 1;
     border: solid 1px lightgrey;
 }
