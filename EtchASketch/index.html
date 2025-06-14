@@ -9,23 +9,37 @@
 </head>
 
 <body>
+    <div id="newGridButtonWrapper"><button id="newGridButton">New picture</button></div>
     <div id="canvas"></div>
 
     <script>
-    const canvas = document.querySelector('#canvas');
-    
-    function prepareCanvas() {
-        let html = '';
+        const canvas = document.querySelector('#canvas');
 
-        for (let i = 0; i < 16*16; i++){
-            html += '<div class="tile"></div>'
+        function prepareCanvas() {
+            let html = '';
+
+            for (let i = 0; i < 16 * 16; i++) {
+                html += '<div class="tile"></div>'
+            }
+
+            canvas.innerHTML = html;
+            canvas.querySelectorAll('.tile').forEach(tile => tile.addEventListener('mouseenter', paintTiles))
         }
 
-        canvas.innerHTML = html;
-    }
+        function paintTiles(event) {
+            const tile = event.target;
 
+            tile.classList.add('painted');
+        }
 
-    document.addEventListener('DOMContentLoaded', prepareCanvas);
+        function createNewCanvas(){
+            let gridSize = window.prompt('How many tiles per side would you like to have for your next picture? (100 is max)');
+
+            console.log(gridSize);
+        }
+
+        document.addEventListener('DOMContentLoaded', prepareCanvas);
+        document.querySelector('#newGridButton').addEventListener('click', createNewCanvas)
     </script>
 </body>
 

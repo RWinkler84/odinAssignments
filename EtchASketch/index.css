@@ -2,7 +2,14 @@ body {
     width: 100%;
     background-color: black;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#newGridButtonWrapper {
+    flex: 1 1 75%;
+    display: flex;
+    padding-bottom: 1rem;
 }
 
 #canvas {
@@ -18,4 +25,8 @@ body {
     flex: 1 1 6.25%;
     aspect-ratio: 1 / 1;
     border: solid 1px lightgrey;
+}
+
+.tile.painted {
+    background-color: lightcoral;
 }
