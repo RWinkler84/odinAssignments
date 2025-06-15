@@ -29,11 +29,16 @@
         function paintTiles(event) {
             const target = event.target;
 
-            if (target.classList.contains('tile')) target.classList.add('painted');
+            if (target.classList.contains('tile')) {
+                let newOpacity = Number(target.style.opacity) + 0.1;
+                target.classList.add('painted');
+
+                target.style.opacity = newOpacity;
+            };
 
         }
 
-        function createNewCanvas(){
+        function createNewCanvas() {
             let gridSize = Number(window.prompt('How many tiles per side would you like to have for your next picture? (100 is max)'));
 
             if (gridSize > 100 || isNaN(gridSize)) createNewCanvas();
