@@ -63,7 +63,7 @@
             prepareCanvas(gridSize);
         }
 
-        document.addEventListener('DOMContentLoaded', prepareCanvas(16));
+        document.addEventListener('DOMContentLoaded', () => prepareCanvas(16));
         document.querySelector('#newGridButton').addEventListener('click', createNewCanvas);
         document.querySelector('#clearGridButton').addEventListener('click', clearCanvas);
         canvas.addEventListener('mouseover', paintTiles);
