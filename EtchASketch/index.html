@@ -24,13 +24,13 @@
             }
 
             canvas.innerHTML = html;
-            canvas.querySelectorAll('.tile').forEach(tile => tile.addEventListener('mouseenter', paintTiles))
         }
 
         function paintTiles(event) {
-            const tile = event.target;
+            const target = event.target;
 
-            tile.classList.add('painted');
+            if (target.classList.contains('tile')) target.classList.add('painted');
+
         }
 
         function createNewCanvas(){
@@ -45,6 +45,7 @@
 
         document.addEventListener('DOMContentLoaded', prepareCanvas(16));
         document.querySelector('#newGridButton').addEventListener('click', createNewCanvas)
+        canvas.addEventListener('mouseover', paintTiles);
     </script>
 </body>
 
