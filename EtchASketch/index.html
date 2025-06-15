@@ -9,28 +9,41 @@
 </head>
 
 <body>
-    <div id="newGridButtonWrapper"><button id="newGridButton">New picture</button></div>
+    <div id="newGridButtonWrapper"><button id="newGridButton">New painting</button><button id="clearGridButton">Clear painting</button></div>
     <div id="canvas"></div>
 
     <script>
         const canvas = document.querySelector('#canvas');
 
         function prepareCanvas(gridSize) {
-            let html = '';
-            let tileWidth = 600 / gridSize;
+
+            document.documentElement.style.setProperty('--gridSize', gridSize);
 
             for (let i = 0; i < gridSize * gridSize; i++) {
-                html += `<div class="tile" style="width: ${tileWidth}px"></div>`;
+                let div = document.createElement('div');
+                div.classList.add('tile');
+                canvas.appendChild(div);
             }
+        }
 
-            canvas.innerHTML = html;
+        function removeGridFromCanvas() {
+            while (canvas.firstChild){
+                canvas.firstChild.remove();
+            }
+        }
+
+        function clearCanvas(){
+            canvas.querySelectorAll('.painted').forEach(div => {
+                div.classList.remove('painted');
+                div.removeAttribute('style');
+            });
         }
 
         function paintTiles(event) {
             const target = event.target;
 
             if (target.classList.contains('tile')) {
-                let newOpacity = Number(target.style.opacity) + 0.1;
+                let newOpacity = target.style.opacity < 1 ? Number(target.style.opacity) + 0.2 : 1;
                 target.classList.add('painted');
 
                 target.style.opacity = newOpacity;
@@ -39,17 +52,20 @@
         }
 
         function createNewCanvas() {
-            let gridSize = Number(window.prompt('How many tiles per side would you like to have for your next picture? (100 is max)'));
+            let gridSize
 
-            if (gridSize > 100 || isNaN(gridSize)) createNewCanvas();
+            do {
+                gridSize = Number(window.prompt('How many tiles per side would you like to have for your next picture? (100 is max)', 16));
+                if (isNaN(gridSize)) alert('The input must be a number');
+            } while (gridSize > 100 || isNaN(gridSize));
 
-            canvas.innerHTML = '';
-
+            removeGridFromCanvas();
             prepareCanvas(gridSize);
         }
 
         document.addEventListener('DOMContentLoaded', prepareCanvas(16));
-        document.querySelector('#newGridButton').addEventListener('click', createNewCanvas)
+        document.querySelector('#newGridButton').addEventListener('click', createNewCanvas);
+        document.querySelector('#clearGridButton').addEventListener('click', clearCanvas);
         canvas.addEventListener('mouseover', paintTiles);
     </script>
 </body>

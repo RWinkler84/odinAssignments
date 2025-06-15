@@ -1,3 +1,7 @@
+:root {
+    --gridSize: 16;
+}
+
 body {
     width: 100%;
     background-color: black;
@@ -10,6 +14,7 @@ body {
     flex: 1 1 75%;
     display: flex;
     padding-bottom: 1rem;
+    gap: 2rem;
 }
 
 #canvas {
@@ -22,6 +27,7 @@ body {
 
 .tile {
     box-sizing: border-box;
+    width: calc(100% / var(--gridSize));
     aspect-ratio: 1 / 1;
     border: solid 1px lightgrey;
 }
