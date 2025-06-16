@@ -63,7 +63,13 @@ function runEquals() {
     }
 }
 
+function truncateFloats(number){
+
+    return number.toPrecision(9).replace(/0+$/, '');
+}
+
 function displayResult(result) {
+    result = truncateFloats(result);
     displayContent.textContent = result;
 }
 
@@ -86,22 +92,36 @@ function clearFullMemory() {
 
 //input event handlers
 function handleNumberInput(event) {
+    if (!event.target.classList.contains('button')) return; 
+
     let numberPressed = event.target.textContent;
 
     if (!operator) {
+        if (numberPressed =='.' && !allowPointInput()) return;
+
         numberA = !numberA ? numberPressed : numberA + numberPressed;
         if (Number(numberA) == 0) numberA = '0';
         displayContent.textContent = numberA;
     }
 
     if (operator) {
+        if (numberPressed == '.' && !allowPointInput()) return;
+
         numberB = !numberB ? numberPressed : numberB + numberPressed;
         if (Number(numberB) == 0) numberB = '0';
         displayContent.textContent = numberB;
     }
 }
 
+function allowPointInput(){
+    if (displayContent.textContent.includes('.')) return false;
+
+    return true;
+}
+
 function handleOperatorInput(event) {
+    if (!event.target.classList.contains('button')) return; 
+
     let operatorPressed = event.target.textContent;
 
     if (!operator) operator = operatorPressed;
