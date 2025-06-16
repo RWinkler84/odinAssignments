@@ -1,0 +1,95 @@
+:root {
+    font-size: 20px;
+    width: 100%;
+
+    box-sizing: border-box;
+
+    --radius: 3px;
+}
+
+body {
+    position: relative;
+    height: 100vh;
+}
+
+#calculatorBody {
+    position: relative;
+    margin: 0 auto;
+    padding: 1rem;
+    width: fit-content;
+    border: solid black 1px;
+    border-radius: 10px;
+    background-color: rgb(90, 89, 89);
+}
+
+#operatorButtonContainer {
+    margin-left: 0.5rem;
+}
+
+.buttonRow {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button {
+    width: 2rem;
+    aspect-ratio: 1/1;
+    text-align: center;
+    border: solid 1px grey;
+    border-radius: var(--radius);
+}
+
+.button:hover {
+    filter: brightness(0.9);
+}
+
+#calculatorDisplay {
+    background-color: lightgray;
+    padding: 0.5rem;
+}
+
+#displayContent {
+    margin: 0;
+    height: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: end;
+}
+
+#equalsButton {
+    width: 4rem;
+    aspect-ratio: 2/1;
+    background-color: lightgreen;
+}
+
+#ceButton {
+    background-color: rgb(252, 101, 101);
+}
+
+#cButton {
+    background-color: orange;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.spaceBetween {
+    justify-content: space-between;
+}
+
+.justifyEnd {
+    justify-content: end;
+}
+
+.halfGap {
+    gap: 0.5rem;
+}
+
+.gap {
+    gap: 1rem;
+}
