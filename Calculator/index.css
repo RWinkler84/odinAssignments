@@ -2,10 +2,12 @@
     font-size: 20px;
     width: 100%;
 
-    box-sizing: border-box;
-
     --radius: 3px;
     --calculatorWidth: 242px;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {

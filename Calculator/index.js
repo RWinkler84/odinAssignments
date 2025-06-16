@@ -25,7 +25,6 @@ function calcDivide() {
     return Number(numberA) / Number(numberB);
 }
 
-//other operations
 function runCalculation() {
     switch (operator) {
         case '+':
@@ -54,8 +53,10 @@ function runCalculation() {
     }
 }
 
+//other operations
+
 function runEquals() {
-    if (!numberA && numberB && operator) result ? numberA = result : numberA = 0;  
+    if (!numberA && numberB && operator) result ? numberA = result : numberA = 0;
 
     if (numberA && numberB && operator) {
         runCalculation();
@@ -63,7 +64,7 @@ function runEquals() {
     }
 }
 
-function truncateFloats(number){
+function truncateFloats(number) {
 
     return number.toPrecision(9).replace(/0+$/, '');
 }
@@ -71,6 +72,26 @@ function truncateFloats(number){
 function displayResult(result) {
     result = truncateFloats(result);
     displayContent.textContent = result;
+}
+
+//calculator memory functions
+function deleteLastEnteredDigit() {
+    let displayedNumber = displayContent.textContent;
+    let shortened = displayedNumber.slice(0, -1);
+
+    if (shortened.length == 0) shortened = 0;
+
+    if (numberA == displayedNumber) {
+        numberA = Number(shortened);
+        displayContent.textContent = shortened;
+
+    }
+
+    if (numberB == displayedNumber) {
+        numberB = Number(shortened);
+        displayContent.textContent = shortened;
+    }
+
 }
 
 function clearCurrentNumber() {
@@ -92,16 +113,20 @@ function clearFullMemory() {
 
 //input event handlers
 function handleNumberInput(event) {
-    if (!event.target.classList.contains('button')) return; 
+    if (!event.target.classList.contains('button')) return;
+    if (event.target.id == 'backspaceButton') {
+        deleteLastEnteredDigit();
+        return;
+    }
 
     let numberPressed = event.target.textContent;
 
     if (!operator) {
-        if (numberPressed =='.' && !allowPointInput()) return;
+        if (numberPressed == '.' && !allowPointInput()) return;
 
         numberA = !numberA ? numberPressed : numberA + numberPressed;
         if (Number(numberA) == 0) numberA = '0';
-        displayContent.textContent = numberA;
+        displayContent.textContent = Number(numberA);
     }
 
     if (operator) {
@@ -109,18 +134,18 @@ function handleNumberInput(event) {
 
         numberB = !numberB ? numberPressed : numberB + numberPressed;
         if (Number(numberB) == 0) numberB = '0';
-        displayContent.textContent = numberB;
+        displayContent.textContent = Number(numberB);
     }
 }
 
-function allowPointInput(){
+function allowPointInput() {
     if (displayContent.textContent.includes('.')) return false;
 
     return true;
 }
 
 function handleOperatorInput(event) {
-    if (!event.target.classList.contains('button')) return; 
+    if (!event.target.classList.contains('button')) return;
 
     let operatorPressed = event.target.textContent;
 
