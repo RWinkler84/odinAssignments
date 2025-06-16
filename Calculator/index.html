@@ -11,7 +11,7 @@
 <body>
     <div id="calculatorBody" class="flex column gap">
         <div id="calculatorDisplay">
-        <p id="displayContent">0</p>
+            <p id="displayContent">0</p>
         </div>
         <div id="buttonContainer" class="flex column halfGap">
             <div class="flex halfGap">
@@ -31,7 +31,8 @@
                         <button class="button">2</button>
                         <button class="button">3</button>
                     </div>
-                    <div class="buttonRow justifyEnd">
+                    <div class="buttonRow">
+                        <button id="backspaceButton" class="button">&#9003;</button>
                         <button class="button">0</button>
                         <button class="button">.</button>
                     </div>
@@ -45,8 +46,8 @@
             </div>
             <div id="lowerButtonsContainer" class="flex spaceBetween halfGap">
                 <div class="flex halfGap">
-                    <button id="ceButton" class="button">CE</button>
-                    <button id="cButton" class="button">C</button>
+                    <button id="clearAllButton" class="button">CE</button>
+                    <button id="clearButton" class="button">C</button>
                 </div>
                 <button id="equalsButton" class="button">=</button>
             </div>

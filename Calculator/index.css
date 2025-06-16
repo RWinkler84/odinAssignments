@@ -5,6 +5,7 @@
     box-sizing: border-box;
 
     --radius: 3px;
+    --calculatorWidth: 242px;
 }
 
 body {
@@ -16,7 +17,7 @@ body {
     position: relative;
     margin: 0 auto;
     padding: 1rem;
-    width: fit-content;
+    max-width: var(--calculatorWidth);
     border: solid black 1px;
     border-radius: 10px;
     background-color: rgb(90, 89, 89);
@@ -46,6 +47,8 @@ body {
 #calculatorDisplay {
     background-color: lightgray;
     padding: 0.5rem;
+    overflow-x: hidden;
+
 }
 
 #displayContent {
@@ -53,7 +56,7 @@ body {
     height: 1.5rem;
     font-size: 1.5rem;
     font-weight: bold;
-    text-align: end;
+    direction: rtl;
 }
 
 #equalsButton {
@@ -62,12 +65,16 @@ body {
     background-color: lightgreen;
 }
 
-#ceButton {
+#clearAllButton {
     background-color: rgb(252, 101, 101);
 }
 
-#cButton {
+#clearButton {
     background-color: orange;
+}
+
+#backspaceButton {
+    background-color: rgb(2, 136, 225);
 }
 
 .flex {

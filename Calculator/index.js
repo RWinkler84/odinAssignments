@@ -136,19 +136,19 @@ function handleOperatorInput(event) {
 }
 
 function handleLowerButtonsInput(event) {
-    let lowerButtonPressed = event.target.textContent;
+    let lowerButtonPressed = event.target.id;
 
     switch (lowerButtonPressed) {
-        case '=':
+        case 'equalsButton':
             runEquals();
             break;
 
-        case 'C':
+        case 'clearButton':
             clearCurrentNumber();
             displayContent.textContent = awaitingInput;
             break;
 
-        case 'CE':
+        case 'clearAllButton':
             clearFullMemory();
             displayContent.textContent = awaitingInput;
             break;
