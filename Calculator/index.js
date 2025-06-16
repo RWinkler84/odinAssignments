@@ -64,9 +64,15 @@ function runEquals() {
     }
 }
 
+function allowPointInput() {
+    if (displayContent.textContent.includes('.')) return false;
+
+    return true;
+}
+
 function truncateFloats(number) {
 
-    return number.toPrecision(9).replace(/0+$/, '');
+    return number.toPrecision(9).replace(/\.?0+$/, '');
 }
 
 function displayResult(result) {
@@ -126,7 +132,8 @@ function handleNumberInput(event) {
 
         numberA = !numberA ? numberPressed : numberA + numberPressed;
         if (Number(numberA) == 0) numberA = '0';
-        displayContent.textContent = Number(numberA);
+        if (numberA == '.') numberA = '0.';
+        displayContent.textContent = numberA;
     }
 
     if (operator) {
@@ -134,14 +141,9 @@ function handleNumberInput(event) {
 
         numberB = !numberB ? numberPressed : numberB + numberPressed;
         if (Number(numberB) == 0) numberB = '0';
-        displayContent.textContent = Number(numberB);
+        if (numberB == '.') numberB = '0.';
+        displayContent.textContent = numberB;
     }
-}
-
-function allowPointInput() {
-    if (displayContent.textContent.includes('.')) return false;
-
-    return true;
 }
 
 function handleOperatorInput(event) {
@@ -181,6 +183,11 @@ function handleLowerButtonsInput(event) {
 
 }
 
+function handleKeyboardInput(event){
+    console.log(event);
+}
+
 document.querySelector('#numberButtonContainer').addEventListener('click', handleNumberInput);
 document.querySelector('#operatorButtonContainer').addEventListener('click', handleOperatorInput);
 document.querySelector('#lowerButtonsContainer').addEventListener('click', handleLowerButtonsInput);
+window.addEventListener('keyup', handleKeyboardInput);
