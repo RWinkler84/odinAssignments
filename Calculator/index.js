@@ -47,14 +47,20 @@ function runCalculation() {
 
         case '/':
             result = calcDivide();
+            if (result == Infinity) {
+                displayContent.textContent = 'Error';
+                result = 0;
+                break;
+            }
+
             displayResult(result);
             clearCurrentCalculation();
             break;
     }
 }
 
-//other operations
 
+//other operations
 function runEquals() {
     if (!numberA && numberB && operator) result ? numberA = result : numberA = 0;
 
@@ -64,14 +70,13 @@ function runEquals() {
     }
 }
 
-function allowPointInput() {
-    if (displayContent.textContent.includes('.')) return false;
-
+function pointInputAllowed(number) {
+    if (number == null) number = '0';
+    if (number.includes('.')) return false;
     return true;
 }
 
 function truncateFloats(number) {
-
     return number.toPrecision(9).replace(/\.?0+$/, '');
 }
 
@@ -79,6 +84,7 @@ function displayResult(result) {
     result = truncateFloats(result);
     displayContent.textContent = result;
 }
+
 
 //calculator memory functions
 function deleteLastEnteredDigit() {
@@ -90,14 +96,12 @@ function deleteLastEnteredDigit() {
     if (numberA == displayedNumber) {
         numberA = Number(shortened);
         displayContent.textContent = shortened;
-
     }
 
     if (numberB == displayedNumber) {
         numberB = Number(shortened);
         displayContent.textContent = shortened;
     }
-
 }
 
 function clearCurrentNumber() {
@@ -117,40 +121,33 @@ function clearFullMemory() {
     result = null;
 }
 
+
 //input event handlers
-function handleNumberInput(event) {
-    if (!event.target.classList.contains('button')) return;
-    if (event.target.id == 'backspaceButton') {
-        deleteLastEnteredDigit();
-        return;
-    }
-
-    let numberPressed = event.target.textContent;
-
+function handleNumberBlockInput(numberPressed) {
     if (!operator) {
-        if (numberPressed == '.' && !allowPointInput()) return;
+        if (numberPressed == '.' && !pointInputAllowed(numberA)) return;
 
         numberA = !numberA ? numberPressed : numberA + numberPressed;
-        if (Number(numberA) == 0) numberA = '0';
+
+        if (numberA == '00') numberA = 0; //prevent leading zeros
         if (numberA == '.') numberA = '0.';
+
         displayContent.textContent = numberA;
     }
 
     if (operator) {
-        if (numberPressed == '.' && !allowPointInput()) return;
+        if (numberPressed == '.' && !pointInputAllowed(numberB)) return;
 
         numberB = !numberB ? numberPressed : numberB + numberPressed;
-        if (Number(numberB) == 0) numberB = '0';
+
+        if (numberA == '00') numberA = 0; //prevent leading zeros
         if (numberB == '.') numberB = '0.';
+
         displayContent.textContent = numberB;
     }
 }
 
-function handleOperatorInput(event) {
-    if (!event.target.classList.contains('button')) return;
-
-    let operatorPressed = event.target.textContent;
-
+function handleOperatorInput(operatorPressed) {
     if (!operator) operator = operatorPressed;
     if (!numberA) result ? numberA = result : numberA = '0';
 
@@ -162,9 +159,7 @@ function handleOperatorInput(event) {
     }
 }
 
-function handleLowerButtonsInput(event) {
-    let lowerButtonPressed = event.target.id;
-
+function handleLowerButtonsInput(lowerButtonPressed) {
     switch (lowerButtonPressed) {
         case 'equalsButton':
             runEquals();
@@ -179,15 +174,40 @@ function handleLowerButtonsInput(event) {
             clearFullMemory();
             displayContent.textContent = awaitingInput;
             break;
+
+        case 'backspaceButton':
+            deleteLastEnteredDigit();
+            break;
+    }
+}
+
+function readInput(event) {
+    event.preventDefault();
+    if (!event.key && !event.target.classList.contains('button')) return;
+
+    let input = event.key ? event.key : event.target.textContent;
+    let numberBlockMatches = '1234567890.'
+    let operatorBlockMatches = '+-*/';
+
+    if (numberBlockMatches.includes(input)) {
+        handleNumberBlockInput(input);
+        return;
     }
 
+    if (operatorBlockMatches.includes(input)) {
+        handleOperatorInput(input);
+        return;
+    }
+
+    //Equals Button Row
+    if (event.target.id == 'equalsButton' || input == 'Enter') handleLowerButtonsInput('equalsButton');
+    if (event.target.id == 'backspaceButton' || input == 'Backspace') handleLowerButtonsInput('backspaceButton');
+    if (event.target.id == 'clearButton') handleLowerButtonsInput('clearButton');
+    if (event.target.id == 'clearAllButton') handleLowerButtonsInput('clearAllButton');
 }
 
-function handleKeyboardInput(event){
-    console.log(event);
-}
 
-document.querySelector('#numberButtonContainer').addEventListener('click', handleNumberInput);
-document.querySelector('#operatorButtonContainer').addEventListener('click', handleOperatorInput);
-document.querySelector('#lowerButtonsContainer').addEventListener('click', handleLowerButtonsInput);
-window.addEventListener('keyup', handleKeyboardInput);
+document.querySelectorAll('.button').forEach(b => { b.setAttribute('tabindex', '-1') }); //prevent firing button clicks via tabulator key
+
+document.querySelector('#calculatorBody').addEventListener('mousedown', readInput);
+window.addEventListener('keyup', readInput);
