@@ -99,6 +99,8 @@ html {
 #imgContainer a{
     color: var(--linkColor);
     text-decoration: none;
+    min-width: 100px;
+    min-height: 100px;
 }
 
 #textContainer {
