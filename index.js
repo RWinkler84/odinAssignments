@@ -1,63 +1,64 @@
 const previewData = {
-    'landingPage': {
-        'title': 'TOP Landing Page Assignment',
-        'previewImg': './img/landingpage.jpg',
-        'imgAlt': 'A preview of the page',
-        'href': './LandingPage/',
-        'keyFeatures': [
+    landingPage: {
+        title: 'TOP Landing Page Assignment',
+        previewImg: './img/landingpage.jpg',
+        imgAlt: 'A preview of the page',
+        href: './LandingPage/',
+        keyFeatures: [
             'looks nice I guess',
             'does nothing else'
             ],
-        'description': 'There is not much to say about this. It is a simply static web page, styled with CSS according to the assignment.',
+        description: 'There is not much to say about this. It is a simply static web page, styled with CSS according to the assignment.',
     },
-    'RockPaperScissors': {
-        'title': 'TOP Rock Paper Scissors game',
-        'previewImg': './img/rockpaperscissors.png',
-        'imgAlt': 'A preview of the page',
-        'href': './RockPaperScissors/',
-        'keyFeatures': [
-            'lets your play against a computer opponent',
+    RockPaperScissors: {
+        title: 'TOP Rock Paper Scissors game',
+        previewImg: './img/rockpaperscissors.png',
+        imgAlt: 'A preview of the page',
+        href: './RockPaperScissors/',
+        keyFeatures: [
+            'lets you play against a computer opponent',
             'you play 5 rounds in one game',
-            'in the end there is a game overview displaying who one',
-            'to restart the game just press one of the buttons'
+            'in the end there is a game overview displaying final scores and who one',
+            'to restart the game just enter your next selection'
             ],
-        'description': `This is a simple Rock Paper Scissors game. Because it the assignment was mostly about the underlying JS logic I did not put too much effort into the visuals. Those leave a lot to be desired.
+        description: `This is a simple Rock Paper Scissors game. Because the assignment was mostly about the underlying JS logic I did not put too much effort into the visuals. Those leave a lot to be desired.
             `
     },
-    'EtchASketch': {
-        'title': 'TOP Etch-a-Sketch',
-        'previewImg': './img/etchasketch.png',
-        'imgAlt': 'A preview of the page',
-        'href': './EtchASketch/',
-        'keyFeatures': [
+    EtchASketch: {
+        title: 'TOP Etch-a-Sketch',
+        previewImg: './img/etchasketch.png',
+        imgAlt: 'A preview of the page',
+        href: './EtchASketch/',
+        keyFeatures: [
             'lets you draw with your mouse', 
             'dynamically generated drawing board, that lets you choose your preferred resolution (up to 100 DIVs per axis)', 
             'good performance even on higher resolution thanks to event deligation'
             ],
-        'description': `The Etch-a-Sketch assignment was an interesting one for me. TOP tasks you with building a virtual childs toy used like a drawing tablet.
+        description: `The Etch-a-Sketch assignment was an interesting one for me. TOP tasks you with building a virtual child's toy used like a drawing tablet.
 
-            While HTML5 offers stuff like Canvas, the idea is to use DIVs that become colored when you hover over them. There is also a catch. After your first draft TOP asks you to let the user decide, which resolution to use (e.g. how many DIVs are created on the x and y axis).
+            While HTML5 offers stuff like canvas for graphics, the idea is to use DIVs that become colored when you hover over them. There is also a catch. After your first draft with a fixed resolution TOP asks you to let the user decide, which resolution to use (e.g. how many DIVs are created on the x and y axis).
             
-            This one was also the first time I compared to solutions by other TOP participants, which was very valuable. I discovered some very interesting ways to get things done.
+            This one was the first I compared to solutions by other TOP participants, which was very valuable. I discovered some unfamiliar and interesting ways to get things done.
             Like letting CSS calculate the width of each DIV dynamically.
 
-            On the other hand I purposefully decided against coloring the DIVs in random generated colors although this was part of the assignment. I just didn't like the look.
+            Last note: I purposefully decided against coloring the DIVs in random generated colors although this was part of the assignment. I just didn't like the look.
             `,
     },
-    'Calculator': {
-        'title': 'TOP Calculator',
-        'previewImg': './img/calculator.png',
-        'imgAlt': 'A preview of the page',
-        'href': './Calculator/',
-        'keyFeatures': [
-            'calculates basic operations (+,-,*,/)', 'handles division by 0',
+    Calculator: {
+        title: 'TOP Calculator',
+        previewImg: './img/calculator.png',
+        imgAlt: 'A preview of the page',
+        href: './Calculator/',
+        keyFeatures: [
+            'calculates basic operations (+,-,*,/)',
+            'handles division by 0',
             'prevents entering multiple decimal points per number',
             'prevents entering leading zeros',
-            'trims trailing zeros and decimal points, if there are no fractional part',
-            'allows continuing to calculate with the result of the previous calculation',
+            'trims trailing zeros and decimal points, if there is no fractional part',
+            'allows continuous calculation with the result of the previous calculation',
             'keyboard support'
         ],
-        'description': `Well...nomen est omen. This is a calculator. And this is my take on the last assignment of the TOP foundational course. 
+        description: `Well...nomen est omen. This is a calculator. And this is my take on the last assignment of the TOP foundational course. 
         
         It sounded easy at first - implement basic calculations, take the user input and put out the result - no problem. But, as always, one you finished the first part of the task, TOP asks you for more:
 
