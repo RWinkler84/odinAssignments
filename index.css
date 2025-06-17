@@ -11,6 +11,9 @@
     --selectionItemColorSelected: #3B7D52;
     --darkFont: #181818;
     --lightFont: #e5e5e5;
+    --lighterFont: #ffffff;
+    --headingColor: #DB4C40;
+    --linkColor: #ffaca4;
 
     --borderRadiusSmall: 5px;
     --borderRadiusBig: 10px;
@@ -34,6 +37,7 @@ html {
 
 #headerContainer h1 {
     margin: 0;
+    color: var(--headingColor);
 }
 
 #mainContainer {
@@ -58,6 +62,12 @@ html {
     padding: 1rem;
 }
 
+#projectPreview {
+    padding: 1.5rem;
+    background-color: var(--selectionItemColor);
+    border-radius: var(--borderRadiusBig);
+}
+
 .selectionItem {
     background-color: var(--selectionItemColor);
     color: var(--lightFont);
@@ -75,6 +85,32 @@ html {
     background-color: var(--selectionItemColorSelected);
 }
 
+
+/* preview styling */
+#imgContainer {
+    flex: 1 1 30%;
+}
+
+#imgContainer img {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+#imgContainer a{
+    color: var(--linkColor);
+    text-decoration: none;
+}
+
+#textContainer {
+    flex: 1 1 70%;
+    color: var(--lighterFont);
+}
+
+#textContainer h2 {
+    color: var(--lightFont);
+}
+
+
 /* generic classes */
 
 .flex {
@@ -91,4 +127,8 @@ html {
 
 .gap {
     gap: 1rem;
+}
+
+.doubleGap {
+    gap: 2rem;
 }
