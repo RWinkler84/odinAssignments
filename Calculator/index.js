@@ -207,5 +207,5 @@ function readInput(event) {
 
 document.querySelectorAll('.button').forEach(b => { b.setAttribute('tabindex', '-1') }); //prevent firing button clicks via tabulator key
 
-document.querySelector('#calculatorBody').addEventListener('mousedown', readInput);
+document.querySelector('#buttonContainer').addEventListener('mousedown', readInput);
 window.addEventListener('keyup', readInput);
