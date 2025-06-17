@@ -149,10 +149,8 @@ function handleNumberBlockInput(numberPressed) {
 
 function handleOperatorInput(operatorPressed) {
     if (!operator) operator = operatorPressed;
-    if (!numberA) result ? numberA = result : numberA = '0';
-
-    if (numberA && operator && !numberB) operator = operatorPressed;
-
+    if (!numberA) result ? numberA = result : numberA = '0'; //no number entered, but operater pressed
+    if (numberA && operator && !numberB) operator = operatorPressed; //change operater, if pressed repeatedly after first number is entered
     if (operator && numberA && numberB) {
         runCalculation();
         operator = operatorPressed;
