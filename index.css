@@ -75,14 +75,18 @@ html {
     border: 0;
     border-radius: var(--borderRadiusBig);
     text-align: center;
+    transition: all 0.1s ease-in-out;
 }
 
 .selectionItem:hover {
     background-color: var(--selectionItemColorSelected);
+    scale: 1.02;
+    transition: all 0.1s ease-in-out;
 }
 
 .selectionItem.selected {
     background-color: var(--selectionItemColorSelected);
+    scale: 1.02;
 }
 
 
@@ -110,6 +114,11 @@ html {
 
 #textContainer h2 {
     color: var(--lightFont);
+}
+
+#textContainer p,
+#textContainer li {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 
