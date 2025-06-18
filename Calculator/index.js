@@ -1,7 +1,7 @@
 const displayContent = document.querySelector('#displayContent');
 
-let numberA = null;
-let numberB = null;
+let numberA = '';
+let numberB = '';
 let operator = null;
 let result;
 
@@ -71,7 +71,7 @@ function runEquals() {
 }
 
 function pointInputAllowed(number) {
-    if (number == null) number = '0';
+    if (number == '') number = '0';
     if (number.includes('.')) return false;
     return true;
 }
@@ -79,6 +79,8 @@ function pointInputAllowed(number) {
 function truncateFloats(number) {
     return number.toPrecision(9).replace(/\.?0+$/, '');
 }
+
+function handleZeroFirstInput(number) {}
 
 function displayResult(result) {
     result = truncateFloats(result);
@@ -105,20 +107,20 @@ function deleteLastEnteredDigit() {
 }
 
 function clearCurrentNumber() {
-    operator ? numberB = null : numberA = null;
+    operator ? numberB = '' : numberA = '';
 }
 
 function clearCurrentCalculation() {
-    numberA = null;
-    numberB = null;
+    numberA = '';
+    numberB = '';
     operator = null;
 }
 
 function clearFullMemory() {
-    numberA = null;
-    numberB = null;
+    numberA = '';
+    numberB = '';
     operator = null;
-    result = null;
+    result = '';
 }
 
 
@@ -126,22 +128,22 @@ function clearFullMemory() {
 function handleNumberBlockInput(numberPressed) {
     if (!operator) {
         if (numberPressed == '.' && !pointInputAllowed(numberA)) return;
+        if (numberA == '0') numberA = ''; //prevent leading zeros
+        
+        numberA += numberPressed;
 
-        numberA = !numberA ? numberPressed : numberA + numberPressed;
+        if (numberA == '.') numberA = '0.'; //prevents NaN when converting to number
 
-        if (numberA == '00') numberA = 0; //prevent leading zeros
-        if (numberA == '.') numberA = '0.';
-
-        displayContent.textContent = numberA;
+        displayContent.textContent = numberA; 
     }
 
     if (operator) {
         if (numberPressed == '.' && !pointInputAllowed(numberB)) return;
+        if (numberB == '0') numberB = ''; //prevent leading zeros
 
-        numberB = !numberB ? numberPressed : numberB + numberPressed;
+        numberB += numberPressed;
 
-        if (numberA == '00') numberA = 0; //prevent leading zeros
-        if (numberB == '.') numberB = '0.';
+        if (numberB == '.') numberB = '0.'; //prevents NaN when converting to number
 
         displayContent.textContent = numberB;
     }
