@@ -4,6 +4,7 @@ let numberA = '';
 let numberB = '';
 let operator = null;
 let result;
+let resultDisplayed = false;
 
 const awaitingInput = '0';
 
@@ -31,30 +32,34 @@ function runCalculation() {
             result = calcAdd();
             displayResult(result);
             clearCurrentCalculation();
+            numberA = result;
             break;
 
         case '-':
             result = calcSubtract();
             displayResult(result);
             clearCurrentCalculation();
+            numberA = result;
             break;
 
         case '*':
             result = calcMultiply();
             displayResult(result);
             clearCurrentCalculation();
+            numberA = result;
             break;
 
         case '/':
             result = calcDivide();
             if (result == Infinity) {
                 displayContent.textContent = 'Error';
-                result = 0;
+                clearCurrentCalculation();
                 break;
             }
 
             displayResult(result);
             clearCurrentCalculation();
+            numberA = result;
             break;
     }
 }
@@ -62,11 +67,8 @@ function runCalculation() {
 
 //other operations
 function runEquals() {
-    if (!numberA && numberB && operator) result ? numberA = result : numberA = 0;
-
     if (numberA && numberB && operator) {
         runCalculation();
-        clearCurrentCalculation();
     }
 }
 
@@ -84,12 +86,15 @@ function handleZeroFirstInput(number) {}
 
 function displayResult(result) {
     result = truncateFloats(result);
+    resultDisplayed = true;
     displayContent.textContent = result;
 }
 
 
 //calculator memory functions
 function deleteLastEnteredDigit() {
+    if (resultDisplayed) return;
+
     let displayedNumber = displayContent.textContent;
     let shortened = displayedNumber.slice(0, -1);
 
@@ -107,7 +112,11 @@ function deleteLastEnteredDigit() {
 }
 
 function clearCurrentNumber() {
-    operator ? numberB = '' : numberA = '';
+    if (numberB) {
+        numberB = '';
+    } else {
+        clearFullMemory();
+    }
 }
 
 function clearCurrentCalculation() {
@@ -121,11 +130,14 @@ function clearFullMemory() {
     numberB = '';
     operator = null;
     result = '';
+    resultDisplayed = false;
 }
 
 
 //input event handlers
 function handleNumberBlockInput(numberPressed) {
+    resultDisplayed = false;
+
     if (!operator) {
         if (numberPressed == '.' && !pointInputAllowed(numberA)) return;
         if (numberA == '0') numberA = ''; //prevent leading zeros
@@ -151,7 +163,7 @@ function handleNumberBlockInput(numberPressed) {
 
 function handleOperatorInput(operatorPressed) {
     if (!operator) operator = operatorPressed;
-    if (!numberA) result ? numberA = result : numberA = '0'; //no number entered, but operater pressed
+    if (!numberA) numberA = '0'; //no number entered, but operater pressed
     if (numberA && operator && !numberB) operator = operatorPressed; //change operater, if pressed repeatedly after first number is entered
     if (operator && numberA && numberB) {
         runCalculation();
