@@ -82,8 +82,6 @@ function truncateFloats(number) {
     return number.toPrecision(9).replace(/\.?0+$/, '');
 }
 
-function handleZeroFirstInput(number) {}
-
 function displayResult(result) {
     result = truncateFloats(result);
     resultDisplayed = true;
